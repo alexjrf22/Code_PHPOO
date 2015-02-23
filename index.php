@@ -1,18 +1,25 @@
-<!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
 <html>
     <head>
         <meta charset="UTF-8">
         <title>Lista Clientes</title>
         <link href="app/css/bootstrap.css" rel="stylesheet" type="text/css" media="all">
+        <link href="app/css/estilo.css" rel="stylesheet" type="text/css" media="all">
     </head>
     <body>
         
         <h1>Lista de Clientes</h1>  
+        
+        <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>" id="form">
+            
+            <select name="ordenar">
+                <option value="">Ordenar Valores</option>
+                <option value="desc">Maior Para Menor</option>
+                <option value="asc">Menor Para Maior</option>
+            </select>
+            
+            <input name="enviar" value="Ordenar" type="submit" class="btn btn-primary">
+            
+        </form>    
         
         <?php
            
@@ -23,17 +30,26 @@ and open the template in the editor.
             
             require_once 'objs_cli.php';
             
-              
+            if(isset($_POST['enviar']))
+            {
+                $ordenar = $_POST['ordenar'];
+                
+                if(!empty($ordenar))
+                {    
+                    ($ordenar=='desc') ? rsort($arrayClientes):  sort($arrayClientes);
+                }
+            }
+            
         ?>
             
-            
+       
             
                 <div class="tabbable tabs-left"> 
                     
                     <ul class="nav nav-tabs">
                         
                         <?php 
-                        
+                                              
                         $tab1 = 0;
             
                         foreach ($arrayClientes as $cliente):
