@@ -1,54 +1,103 @@
 <?php
 
-class Cliente
+require_once './interfaces/InterfaceClientes.php';
+
+class Cliente implements InterfaceClientes
 {
         public $nome;
         public $cpf;
+        public $tipo;
+        public $cnpj;
         public $endereco;
         public $data_nas;
-       
-        function getNome()
+        public $classificacao;
+        
+        public function getClassificacao()
+        {
+            return $this->classificacao;
+        }
+
+        public function setClassificacao($classificacao)
+        {
+            $this->classificacao = $classificacao;
+            return $this;
+        }
+
+        public function getTipo()
+        {
+            return $this->tipo;
+        }
+
+        public function setTipo($tipo)
+        {
+            $this->tipo = $tipo;
+            return $this;
+        }
+        
+        public function getCnpj()
+        {
+            return $this->cnpj;
+        }
+
+        public function setCnpj($cnpj)
+        {
+            $this->cnpj = $cnpj;
+            return $this;
+        }
+
+        public function getNome()
         {     
             return $this->nome;            
         }
 
-        function getCpf()
+        public function getCpf()
         {
             return $this->cpf;
         }
 
-        function getEndereco() 
+        public function getEndereco() 
         {
             return $this->endereco;
-        }
+        }   
 
-        function getData_nas()
+        public function getData_nas()
         {
             return $this->data_nas;
         }
 
-        function setNome($nome)
+        public function setNome($nome)
         {
             $this->nome = $nome;
             return $this;
         }
 
-        function setCpf($cpf)
+        public function setCpf($cpf)
         {
             $this->cpf = $cpf;
             return $this;
         }
 
-        function setEndereco($endereco) 
+        public function setEndereco($endereco) 
         {
             $this->endereco = $endereco;
             return $this;
         }
 
-        function setData_nas($data_nas) 
+        public function setData_nas($data_nas) 
         {
             $this->data_nas = $data_nas;
             return $this;
+        }
+        
+        public function ClassificarCliente($classificacao)
+        {
+            $y = $classificacao;
+            
+            for($x=0; $x<$y; $x++)
+            {
+                echo "<i class='icon-star'></i>";
+            }
+            
         }
 
 

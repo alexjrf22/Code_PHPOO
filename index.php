@@ -8,7 +8,7 @@ and open the template in the editor.
     <head>
         <meta charset="UTF-8">
         <title>Lista Clientes</title>
-        <link href="app/css/bootstrap.css" rel="stylesheet" type="text/css" media="all">
+        <link href="app/css/bootstrap.css" rel="stylesheet" type="text/css" media="all">    
     </head>
     <body>
         
@@ -22,6 +22,9 @@ and open the template in the editor.
             $arrayClientes = array();
             
             require_once 'objs_cli.php';
+            require_once './Cliente.php';
+            
+            $obj = new Cliente();
             
               
         ?>
@@ -60,17 +63,22 @@ and open the template in the editor.
                 
                             $tab++;
                             $nome = $cliente->nome;
+                            $tipo = $cliente->tipo;
                             $cpf = $cliente->cpf;
+                            $cnpj = $cliente->cnpj;
                             $data_nas = $cliente->data_nas;
                             $endereco = $cliente->endereco;
+                            $classificacao = $cliente->classificacao;
                             
                         ?>
                         
                         <div class="tab-pane" id="<?php echo 'tab' . $tab; ?>">
                             <p><b>Nome do Cliente:</b> <?php echo $nome; ?></p>
-                            <p><b>Cpf do Cliente:</b> <?php echo $cpf; ?></p>
+                            <p><b>Tipo do Cliente:</b> <?php echo $tipo; ?></p>  
+                            <?php echo ($tipo == "Pessoa Fisica") ? "<p><b>CPF do Cliente:</b> " .$cpf : "<p><b>CNPJ do Cliente:</b> ". $cnpj; ?></p>
                             <p><b>Data de Nascimento do Cliente:</b> <?php echo $data_nas; ?></p>
                             <p><b>Endereço do Cliente:</b> <?php echo $endereco; ?></p>
+                            <p><b>Cliente </b> <?php $obj->ClassificarCliente($classificacao); ?></p>
                         </div>
                         
                          <?php endforeach; ?>
