@@ -4,13 +4,13 @@ require_once './interfaces/InterfaceClientes.php';
 
 class Cliente implements InterfaceClientes
 {
-        public $nome;
-        public $cpf;
-        public $tipo;
-        public $cnpj;
-        public $endereco;
-        public $data_nas;
-        public $classificacao;
+        private $nome;
+        private $cpf;
+        private $tipo;
+        private $cnpj;
+        private $endereco;
+        private $data_nas;
+        private $classificacao;
         
         public function getClassificacao()
         {
@@ -60,7 +60,7 @@ class Cliente implements InterfaceClientes
             return $this->endereco;
         }   
 
-        public function getData_nas()
+        public function getDataNas()
         {
             return $this->data_nas;
         }
@@ -83,7 +83,7 @@ class Cliente implements InterfaceClientes
             return $this;
         }
 
-        public function setData_nas($data_nas) 
+        public function setDataNas($data_nas) 
         {
             $this->data_nas = $data_nas;
             return $this;

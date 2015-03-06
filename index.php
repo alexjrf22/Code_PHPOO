@@ -56,17 +56,22 @@
                         <?php 
                                               
                         $tab1 = 0;
-            
-                        foreach ($arrayClientes as $cliente):
+                        
+                        if (isset($arrayClientes)):
+                            
+                            foreach ($arrayClientes as $cliente):
 
                         $tab1++;
-                        $nome = $cliente->nome;
+                        $nome = $cliente->getNome((isset($nome))? $nome : null);
                         
                         ?>
                         
                         <li><a href="<?php echo '#tab' . $tab1; ?>" data-toggle="tab"><?php echo $nome ?></a></li>
                         
-                         <?php endforeach;  ?>  
+                         <?php 
+                            endforeach; 
+                            endif;
+                         ?>  
                         
                     </ul>
                     
@@ -80,13 +85,13 @@
                          foreach ($arrayClientes as $cliente):
                 
                             $tab++;
-                            $nome = $cliente->nome;
-                            $tipo = $cliente->tipo;
-                            $cpf = $cliente->cpf;
-                            $cnpj = $cliente->cnpj;
-                            $data_nas = $cliente->data_nas;
-                            $endereco = $cliente->endereco;
-                            $classificacao = $cliente->classificacao;
+                            $nome = $cliente->getNome((isset($nome))? $nome : null);
+                            $tipo = $cliente->getTipo((isset($tipo))? $tipo : null);
+                            $cpf = $cliente->getCpf((isset($cpf))? $cpf : null);
+                            $cnpj = $cliente->getCnpj((isset($cnpj))? $cnpj : null);
+                            $data_nas = $cliente->getDataNas((isset($data_nas))? $data_nas : null);
+                            $endereco = $cliente->getEndereco((isset($endereco))? $endereco : null);
+                            $classificacao = $cliente->getClassificacao((isset($classificacao))? $classificacao : null);
                             
                         ?>
                         
@@ -96,7 +101,7 @@
                             <?php echo ($tipo == "Pessoa Fisica") ? "<p><b>CPF do Cliente:</b> " .$cpf : "<p><b>CNPJ do Cliente:</b> ". $cnpj; ?></p>
                             <p><b>Data de Nascimento do Cliente:</b> <?php echo $data_nas; ?></p>
                             <p><b>Endereço do Cliente:</b> <?php echo $endereco; ?></p>
-                            <p><b>Cliente </b> <?php $obj->ClassificarCliente($classificacao); ?></p>
+                            <p><b>Cliente </b> <?php $cliente->ClassificarCliente($cliente->getClassificacao()); ?></p>
                         </div>
                         
                          <?php endforeach; ?>
