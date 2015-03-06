@@ -62,7 +62,7 @@
                             foreach ($arrayClientes as $cliente):
 
                         $tab1++;
-                        $nome = $cliente->getNome((isset($nome))? $nome : null);
+                        $nome = $cliente->getNome();
                         
                         ?>
                         
@@ -85,13 +85,13 @@
                          foreach ($arrayClientes as $cliente):
                 
                             $tab++;
-                            $nome = $cliente->getNome((isset($nome))? $nome : null);
-                            $tipo = $cliente->getTipo((isset($tipo))? $tipo : null);
-                            $cpf = $cliente->getCpf((isset($cpf))? $cpf : null);
-                            $cnpj = $cliente->getCnpj((isset($cnpj))? $cnpj : null);
-                            $data_nas = $cliente->getDataNas((isset($data_nas))? $data_nas : null);
-                            $endereco = $cliente->getEndereco((isset($endereco))? $endereco : null);
-                            $classificacao = $cliente->getClassificacao((isset($classificacao))? $classificacao : null);
+                            $nome = $cliente->getNome();
+                            $tipo = $cliente->getTipo();
+                            $cpf = $cliente->getCpf();
+                            $cnpj = $cliente->getCnpj();
+                            $data_nas = $cliente->getDataNas();
+                            $endereco = $cliente->getEndereco();
+                            $classificacao = $cliente->getClassificacao();
                             
                         ?>
                         
@@ -101,7 +101,7 @@
                             <?php echo ($tipo == "Pessoa Fisica") ? "<p><b>CPF do Cliente:</b> " .$cpf : "<p><b>CNPJ do Cliente:</b> ". $cnpj; ?></p>
                             <p><b>Data de Nascimento do Cliente:</b> <?php echo $data_nas; ?></p>
                             <p><b>Endereço do Cliente:</b> <?php echo $endereco; ?></p>
-                            <p><b>Cliente </b> <?php $cliente->ClassificarCliente($cliente->getClassificacao()); ?></p>
+                            <p><b>Cliente </b> <?php $cliente->ClassificarCliente($classificacao); ?></p>
                         </div>
                         
                          <?php endforeach; ?>
