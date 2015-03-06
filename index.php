@@ -31,9 +31,6 @@
             $arrayClientes = array();
             
             require_once 'objs_cli.php';
-            require_once './Cliente.php';
-            
-            $obj = new Cliente();
             
             if(isset($_POST['enviar']))
             {
@@ -46,27 +43,20 @@
             }
             
         ?>
-            
-       
-            
+         
                 <div class="tabbable tabs-left"> 
                     
                     <ul class="nav nav-tabs">
                         
                         <?php 
-                                              
-                        $tab1 = 0;
-                        
+                       
                         if (isset($arrayClientes)):
                             
-                            foreach ($arrayClientes as $cliente):
+                            foreach ($arrayClientes as $key => $cliente):
 
-                        $tab1++;
-                        $nome = $cliente->getNome();
-                        
                         ?>
                         
-                        <li><a href="<?php echo '#tab' . $tab1; ?>" data-toggle="tab"><?php echo $nome ?></a></li>
+                        <li><a href="<?php echo '#tab' . $key; ?>" data-toggle="tab"><?php echo $cliente->getNome(); ?></a></li>
                         
                          <?php 
                             endforeach; 
@@ -79,33 +69,18 @@
                     
                     <div class="tab-content">
                         <?php
-                        
-                         $tab = 0;
-                         
-                         foreach ($arrayClientes as $cliente):
-                
-                            $tab++;
-                            $nome = $cliente->getNome();
-                            $tipo = $cliente->getTipo();
-                            $cpf = $cliente->getCpf();
-                            $cnpj = $cliente->getCnpj();
-                            $data_nas = $cliente->getDataNas();
-                            $endereco = $cliente->getEndereco();
-                            $classificacao = $cliente->getClassificacao();
-                            
+                          foreach ($arrayClientes as $key => $cliente):
                         ?>
-                        
-                        <div class="tab-pane" id="<?php echo 'tab' . $tab; ?>">
-                            <p><b>Nome do Cliente:</b> <?php echo $nome; ?></p>
-                            <p><b>Tipo do Cliente:</b> <?php echo $tipo; ?></p>  
-                            <?php echo ($tipo == "Pessoa Fisica") ? "<p><b>CPF do Cliente:</b> " .$cpf : "<p><b>CNPJ do Cliente:</b> ". $cnpj; ?></p>
-                            <p><b>Data de Nascimento do Cliente:</b> <?php echo $data_nas; ?></p>
-                            <p><b>Endereço do Cliente:</b> <?php echo $endereco; ?></p>
-                            <p><b>Cliente </b> <?php $cliente->ClassificarCliente($classificacao); ?></p>
-                        </div>
-                        
-                         <?php endforeach; ?>
-                        
+                            <div class="tab-pane" id="<?php echo 'tab' . $key; ?>">
+                              <p><b>Nome:</b> <?php echo $cliente->getNome(); ?></p>
+                              <p><b>Tipo:</b> <?php echo $cliente->getTipo(); ?></p>
+                              <?php echo ($cliente->getTipo() == "Pessoa Fisica") ? "<p><b>CPF:</b> " .$cliente->getCpf() : "<p><b>CNPJ:</b> ". $cliente->getCnpj(); ?></p>
+                              <p><b>Data de Nascimento:</b> <?php echo $cliente->getDataNas(); ?></p>
+                              <p><b>Endereço:</b> <?php echo $cliente->getEndereco(); ?></p>
+                              <p><b>Cliente </b> <?php $cliente->ClassificarCliente($cliente->getClassificacao()); ?></p>
+                            </div>
+                        <?php endforeach; ?>
+
                     </div>
                     
                 </div>
