@@ -46,9 +46,7 @@
             }
             
         ?>
-            
-       
-            
+           
                 <div class="tabbable tabs-left"> 
                     
                     <ul class="nav nav-tabs">
