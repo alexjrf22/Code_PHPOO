@@ -1,5 +1,8 @@
 <?php
-            require_once 'Cliente.php';
+                       
+            namespace Alex;
+            
+            use Alex\Cliente\Cliente;
              
             $arrayClientes[0] = new Cliente();
             $arrayClientes[0]->setNome("Alexandre");

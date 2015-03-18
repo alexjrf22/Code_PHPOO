@@ -1,8 +1,10 @@
 <?php
 
-require_once './interfaces/InterfaceClientes.php';
+namespace Alex\Cliente;
 
-class Cliente implements InterfaceClientes
+use Alex\Interfaces\InterfacesClientes;
+
+class Cliente implements InterfacesClientes
 {
         private $nome;
         private $cpf;

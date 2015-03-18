@@ -28,9 +28,22 @@
             ini_set("display_errors", true);
             error_reporting(E_ALL);
             
+            /*
+            define("CLASS_DIR", 'src');
+            set_include_path(get_include_path().PATH_SEPARATOR.CLASS_DIR);
+            spl_autoload_register();
+           */
+            
+                define("CLASS_DIR", "src" . DIRECTORY_SEPARATOR);
+    
+                spl_autoload_register(function($class) {
+                $className = CLASS_DIR . str_replace("\\", DIRECTORY_SEPARATOR, $class) . ".php";
+                include($className);
+            });
+            
             $arrayClientes = array();
             
-            require_once 'objs_cli.php';
+            require_once './src/Alex/objs_cli.php';
             
             if(isset($_POST['enviar']))
             {

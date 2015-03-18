@@ -1,6 +1,8 @@
 <?php
 
-interface InterfaceClientes 
+namespace Alex\Interfaces;
+
+interface InterfacesClientes 
 {
 
     public function ClassificarCliente($classificacao);
