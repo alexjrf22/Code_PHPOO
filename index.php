@@ -23,27 +23,26 @@
             
         </form>    
         
-        <?php
-           
+        <?php 
+               
             ini_set("display_errors", true);
             error_reporting(E_ALL);
-            
-            /*
-            define("CLASS_DIR", 'src');
-            set_include_path(get_include_path().PATH_SEPARATOR.CLASS_DIR);
-            spl_autoload_register();
-           */
-            
-                define("CLASS_DIR", "src" . DIRECTORY_SEPARATOR);
+                                
+            define("CLASS_DIR", "src" . DIRECTORY_SEPARATOR);
     
-                spl_autoload_register(function($class) {
-                $className = CLASS_DIR . str_replace("\\", DIRECTORY_SEPARATOR, $class) . ".php";
-                include($className);
-            });
+            spl_autoload_register(function($class) {
+            $className = CLASS_DIR . str_replace("\\", DIRECTORY_SEPARATOR, $class) . ".php";
+            include($className);});
             
-            $arrayClientes = array();
+            use Alex\Cliente\Cliente;
+            use Alex\Config\ConfigConexao;
+            use Alex\Config\ConfigData;
             
-            require_once './src/Alex/objs_cli.php';
+            $objCli = new Cliente();
+            $conexao = new ConfigConexao();
+            $objData = new ConfigData();
+            
+            $arrayClientes = $objCli->listar($conexao);
             
             if(isset($_POST['enviar']))
             {
@@ -69,7 +68,7 @@
 
                         ?>
                         
-                        <li><a href="<?php echo '#tab' . $key; ?>" data-toggle="tab"><?php echo $cliente->getNome(); ?></a></li>
+                        <li><a href="<?php echo '#tab' . $key; ?>" data-toggle="tab"><?php echo $cliente['nome']; ?></a></li>
                         
                          <?php 
                             endforeach; 
@@ -83,22 +82,22 @@
                           foreach ($arrayClientes as $key => $cliente):
                         ?>
                             <div class="tab-pane" id="<?php echo 'tab' . $key; ?>">
-                              <p><b>Nome:</b> <?php echo $cliente->getNome(); ?></p>
-                              <p><b>Tipo:</b> <?php echo $cliente->getTipo(); ?></p>
-                              <?php echo ($cliente->getTipo() == "Pessoa Fisica") ? "<p><b>CPF:</b> " .$cliente->getCpf() : "<p><b>CNPJ:</b> ". $cliente->getCnpj(); ?></p>
-                              <p><b>Data de Nascimento:</b> <?php echo $cliente->getDataNas(); ?></p>
-                              <p><b>Endereço:</b> <?php echo $cliente->getEndereco(); ?></p>
-                              <p><b>Cliente </b> <?php $cliente->ClassificarCliente($cliente->getClassificacao()); ?></p>
+                              <p><b>Nome:</b> <?php echo $cliente['nome']; ?></p>
+                              <p><b>Tipo:</b> <?php echo $cliente['tipo']; ?></p>
+                              <?php echo ($cliente['tipo'] == "Pessoa Fisica") ? "<p><b>CPF:</b> " .$cliente['cpf'] : "<p><b>CNPJ:</b> ". $cliente['cnpj']; ?></p>
+                            <p><b>Data de Nascimento:</b> <?php echo $objData->DataParaBR($cliente['data_nas']); ?></p>
+                              <p><b>Endereço:</b> <?php echo $cliente['endereco']; ?></p>
+                              <p><b>Cliente </b> <?php $objCli->Classificacao($cliente['estrelas']); ?></p>
                             </div>
                         <?php endforeach; ?>
-
-                    </div>
+  
+                   </div>
                     
-                </div>
-            
+               </div>
  
         <script src="app/js/jquery.js" type="text/javascript"></script>
         <script src="app/js/bootstrap.js" type="text/javascript"></script>
-        
+                  
+
     </body>
 </html>

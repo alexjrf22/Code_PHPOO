@@ -1,108 +1,34 @@
 <?php
 
 namespace Alex\Cliente;
+use Alex\Config\ConfigConexao;
+use Alex\Interfaces\InterfacesCliente;
 
-use Alex\Interfaces\InterfacesClientes;
-
-class Cliente implements InterfacesClientes
+class Cliente implements InterfacesCliente
 {
-        private $nome;
-        private $cpf;
-        private $tipo;
-        private $cnpj;
-        private $endereco;
-        private $data_nas;
-        private $classificacao;
-        
-        public function getClassificacao()
-        {
-            return $this->classificacao;
-        }
 
-        public function setClassificacao($classificacao)
+        public function listar(ConfigConexao $conexao)
         {
-            $this->classificacao = $classificacao;
-            return $this;
-        }
-
-        public function getTipo()
-        {
-            return $this->tipo;
-        }
-
-        public function setTipo($tipo)
-        {
-            $this->tipo = $tipo;
-            return $this;
-        }
-        
-        public function getCnpj()
-        {
-            return $this->cnpj;
-        }
-
-        public function setCnpj($cnpj)
-        {
-            $this->cnpj = $cnpj;
-            return $this;
-        }
-
-        public function getNome()
-        {     
-            return $this->nome;            
-        }
-
-        public function getCpf()
-        {
-            return $this->cpf;
-        }
-
-        public function getEndereco() 
-        {
-            return $this->endereco;
-        }   
-
-        public function getDataNas()
-        {
-            return $this->data_nas;
-        }
-
-        public function setNome($nome)
-        {
-            $this->nome = $nome;
-            return $this;
-        }
-
-        public function setCpf($cpf)
-        {
-            $this->cpf = $cpf;
-            return $this;
-        }
-
-        public function setEndereco($endereco) 
-        {
-            $this->endereco = $endereco;
-            return $this;
-        }
-
-        public function setDataNas($data_nas) 
-        {
-            $this->data_nas = $data_nas;
-            return $this;
-        }
-        
-        public function ClassificarCliente($classificacao)
-        {
-            $y = $classificacao;
+            $query = "select * from clientes";
             
-            for($x=0; $x<$y; $x++)
+            $stmt = $conexao->prepare($query);
+            $stmt->execute();
+            
+            $lista = $stmt->fetchAll(\PDO::FETCH_ASSOC);  
+            return $lista;
+            
+        }
+        
+        public function classificacao($estrelas)
+        {
+            $classificacao = $estrelas;
+            
+            for( $x = 0; $x < $classificacao; $x ++ )
             {
                 echo "<i class='icon-star'></i>";
             }
             
         }
-
-
-        
+             
 }
 
